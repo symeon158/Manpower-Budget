@@ -21,6 +21,17 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
   Incorporates logic to:
   - Apply salary increases only if the employee has completed 12 months of service by 1st July 2025.
   - Apply increase only to months **after** July 2025.
+  ```excel
+=ROUND(
+  IF(
+    AND(
+      F5 <= EDATE($E$3; -12);
+      OR(ISBLANK(G5); G5 > DATE(YEAR($E$3)+1; MONTH($E$3); DAY($E$3)))
+    );
+    (MIN(M5; 6) * O5) + (MAX(M5 - 6; 0) * O5 * (1 + $E$2));
+    M5 * O5
+  );
+2)
 
 - **Two-Tier Monthly Calculation**  
   - Pre-increase months use original monthly salary.
@@ -144,15 +155,4 @@ This formula computes the number of months an employee is active in the budget y
 ---
 
 
-💰 Conditional Salary Increase Formula
-This formula applies a mid-year salary increase only for the portion of active months after July 2025, given eligibility.
-=ROUND(
-  IF(
-    AND(
-      F5 <= EDATE($E$3; -12);
-      OR(ISBLANK(G5); G5 > DATE(YEAR($E$3)+1; MONTH($E$3); DAY($E$3)))
-    );
-    (MIN(M5; 6) * O5) + (MAX(M5 - 6; 0) * O5 * (1 + $E$2));
-    M5 * O5
-  );
-2)
+
