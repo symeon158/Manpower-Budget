@@ -23,14 +23,11 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
   - Apply increase only to months **after** July 2025.
 
 ```excel
-=ROUND(
+ROUND(
   IF(
-    AND(
-      F5 <= EDATE($E$3; -12);
-      OR(ISBLANK(G5); G5 > DATE(YEAR($E$3)+1; MONTH($E$3); DAY($E$3)))
-    );
-    (MIN(M5; 6) * O5) + (MAX(M5 - 6; 0) * O5 * (1 + $E$2));
-    M5 * O5
+    AND(F5 <=$E$3; OR(ISBLANK(G5); G5 > DATE(YEAR($E$3)+1;MONTH($E$3);DAY($E$3))));
+    (MIN(L5; 6) * N5) + (MAX(L5 - 6; 0) * N5 * (1 + $E$2));
+    L5 * N5
   );
 2)
 ```
