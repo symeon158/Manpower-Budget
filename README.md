@@ -19,7 +19,7 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
 
 - **Salary Increase Logic**  
   Incorporates logic to:
-  - Apply salary increases only if the employee has completed 12 months of service by 1st July 2025.
+  - Apply salary increases only if the employee has completed 12 months of service by 1st July 2025.  
   - Apply increase only to months **after** July 2025.
 
 ```excel
@@ -33,10 +33,10 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
     M5 * O5
   );
 2)
-
+```
 
 - **Two-Tier Monthly Calculation**  
-  - Pre-increase months use original monthly salary.
+  - Pre-increase months use original monthly salary.  
   - Post-increase months apply uplifted rate.
 
 - **Contribution Calculation**  
@@ -44,7 +44,7 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
 
 ---
 
-# Active Months Calculation
+## 📅 Active Months Calculation
 
 This formula computes the number of months an employee is active in the budget year, handling:
 
@@ -52,6 +52,7 @@ This formula computes the number of months an employee is active in the budget y
 - Retirement mid-year  
 - Diwali eligibility adjustments  
 - Pro-rata calculations
+
 ```excel
 =LET(
   HiringDate;      F5;
@@ -153,8 +154,6 @@ This formula computes the number of months an employee is active in the budget y
 
   Result
 )
+```
 
 ---
-
-
-
