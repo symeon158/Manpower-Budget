@@ -31,6 +31,109 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
 
 ---
 
+## 📘 Formula Snippet: Projection Months Current Year
+```excel
+=LET(
+  HiringDate;      F5;
+  RetireDate;      G5;
+  prodate;         $E$3;
+  PrevYear;        YEAR(prodate) - 1;
+  CurrYear;        YEAR(prodate);
+  BudgetYear;      YEAR(prodate) + 1;
+  YearH;           YEAR(HiringDate);
+  YearR;           YEAR(RetireDate);
+  MonthThresh;     10;
+  Divisor;         30,5;
+  StartCurrYear;   DATE(CurrYear; 1; 1);
+  EndCurYear;      DATE(CurrYear; 12; 31);
+  diwally;         DATE(CurrYear; 10; 1);
+
+  BaseMonths;      (EndCurYear - prodate) / Divisor;
+  RetireMonths;    (RetireDate - prodate) / Divisor;
+  HireMonths;      (EndCurYear - HiringDate) / Divisor;
+  RetireHiring;    (RetireDate - HiringDate) / Divisor;
+  DiwallyAdj;      ((diwally - HiringDate) / Divisor) / 12;
+  DiwaliCheck;     (diwally - HiringDate) / Divisor > 11,9;
+
+  NoRetire;
+    IF(
+      YearH = BudgetYear;
+      0;
+    IF(
+      YearH < PrevYear;
+      BaseMonths + 1;
+    IF(
+      YearH = PrevYear;
+      IF(DiwaliCheck; BaseMonths + 1; BaseMonths + DiwallyAdj);
+    IF(
+      YearH = CurrYear;
+      IF(HiringDate > prodate;
+        IF(MONTH(HiringDate) > MonthThresh;
+           HireMonths;
+           HireMonths + DiwallyAdj
+      );IF(MONTH(HiringDate) > MonthThresh;
+          BaseMonths;
+          BaseMonths + DiwallyAdj)
+      );0
+    ))));
+
+  RetireCalc;
+  IFS(
+    AND(YearH <= CurrYear; RetireDate <= prodate); 0;
+
+    AND(YearH < PrevYear; YearR = CurrYear);
+      IF(MONTH(RetireDate) > MonthThresh; RetireMonths + 1; RetireMonths);
+
+    AND(YearH = PrevYear; YearR = CurrYear);
+      IF(MONTH(RetireDate) > MonthThresh;
+         IF(DiwaliCheck; RetireMonths + 1; RetireMonths + DiwallyAdj);
+         RetireMonths
+      );
+
+    AND(YearH = CurrYear; YearR = CurrYear);
+      IF(
+        HiringDate <= prodate;
+        IF(AND(MONTH(RetireDate) > MonthThresh; MONTH(HiringDate) < MonthThresh);
+           RetireMonths + DiwallyAdj;
+           RetireMonths
+        );
+        IF(AND(MONTH(RetireDate) > MonthThresh; MONTH(HiringDate) < MonthThresh);
+           RetireHiring + DiwallyAdj;
+           RetireHiring
+        )
+      );
+
+    AND(YearH = CurrYear; YearR = BudgetYear);
+      IF(
+        HiringDate <= prodate;
+        IF(MONTH(HiringDate) < MonthThresh;
+           BaseMonths + DiwallyAdj;
+           BaseMonths
+        );
+        IF(MONTH(HiringDate) < MonthThresh;
+           HireMonths + DiwallyAdj;
+           HireMonths
+        )
+      );
+
+    AND(YearH <= PrevYear; YearR = BudgetYear);
+      IF(DiwaliCheck;
+           BaseMonths + 1;
+           BaseMonths + DiwallyAdj);
+
+    TRUE; NA()
+  );
+
+  Result;
+    IF(
+      YearH = BudgetYear;
+      0;
+      IF(NOT(ISBLANK(RetireDate)); RetireCalc; NoRetire)
+    );
+
+  Result
+)
+
 ## 📘 Formula Snippet: Conditional Salary Increase
 
 ```excel
