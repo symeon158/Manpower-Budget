@@ -144,7 +144,8 @@ This formula computes the number of months an employee is active in the budget y
 ---
 
 
-```excel
+💰 Conditional Salary Increase Formula
+This formula applies a mid-year salary increase only for the portion of active months after July 2025, given eligibility.
 =ROUND(
   IF(
     AND(
