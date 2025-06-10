@@ -133,7 +133,7 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
 
   Result
 )
-
+```excel
 ## 📘 Formula Snippet: Conditional Salary Increase
 
 ```excel
