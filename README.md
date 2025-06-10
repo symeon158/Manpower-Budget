@@ -31,7 +31,14 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
 
 ---
 
-## 📘 Formula Snippet: Projection Months Current Year
+# Active Months Calculation
+
+This formula computes the number of months an employee is active in the budget year, handling:
+
+- Hiring before/after the budget year  
+- Retirement mid-year  
+- Diwali eligibility adjustments  
+- Pro-rata calculations
 ```excel
 =LET(
   HiringDate;      F5;
@@ -136,9 +143,7 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
 
 ---
 
-### 2. `formulas/ConditionalSalaryIncrease.md`
 
-```markdown
 # Conditional Salary Increase
 
 This formula applies a mid-year salary increase only for the portion of active months **after** July 2025, given eligibility:
