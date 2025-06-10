@@ -12,16 +12,17 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
 
 - **Automatic Month Calculations**  
   Calculates the number of active months in the budget year, accounting for:
-  - Hiring date
-  - Retirement date
-  - Pro-rata adjustments
+  - Hiring date  
+  - Retirement date  
+  - Pro-rata adjustments  
   - Diwali-based eligibility bonuses
 
 - **Salary Increase Logic**  
   Incorporates logic to:
   - Apply salary increases only if the employee has completed 12 months of service by 1st July 2025.
   - Apply increase only to months **after** July 2025.
-  ```excel
+
+```excel
 =ROUND(
   IF(
     AND(
@@ -32,6 +33,7 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
     M5 * O5
   );
 2)
+
 
 - **Two-Tier Monthly Calculation**  
   - Pre-increase months use original monthly salary.
