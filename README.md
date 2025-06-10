@@ -133,13 +133,23 @@ Developed with Excel `LET()`, `IFS()`, `ROUND()`, and date functions for **preci
 
   Result
 )
-```excel
-## 📘 Formula Snippet: Conditional Salary Increase
+
+---
+
+### 2. `formulas/ConditionalSalaryIncrease.md`
+
+```markdown
+# Conditional Salary Increase
+
+This formula applies a mid-year salary increase only for the portion of active months **after** July 2025, given eligibility:
 
 ```excel
 =ROUND(
   IF(
-    AND(F5 <= $E$3; OR(ISBLANK(G5); G5 > DATE(YEAR($E$3)+1; MONTH($E$3); DAY($E$3))));
+    AND(
+      F5 <= EDATE($E$3; -12);
+      OR(ISBLANK(G5); G5 > DATE(YEAR($E$3)+1; MONTH($E$3); DAY($E$3)))
+    );
     (MIN(M5; 6) * O5) + (MAX(M5 - 6; 0) * O5 * (1 + $E$2));
     M5 * O5
   );
