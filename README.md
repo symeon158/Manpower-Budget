@@ -1,4 +1,4 @@
-# 📊 Manpower Budgeting in Excel (India Division)
+# 📊 Manpower Budgeting in Excel
 
 ## Overview
 
